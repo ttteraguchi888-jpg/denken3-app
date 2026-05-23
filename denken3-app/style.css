@@ -1,0 +1,844 @@
+/* =================================================================
+   BABYMETAL風デザインシステム (style.css) - 視認性強化＆メタル特化版
+   60代のユーザーでも快適に読めるよう、全体的に文字サイズを拡大（1.2倍〜1.5倍）。
+   ヘヴィメタル感を強調するため「Metal Mania」フォントを導入し、
+   赤熱した金属や溶岩のようなグロー（発光）エフェクトを強化しました。
+   ================================================================= */
+
+/* -----------------------------------------------------------------
+   フォントとカラー定数の設定
+   ----------------------------------------------------------------- */
+/* 
+   Metal Mania: ヘヴィメタル特化のトゲトゲした力強い英字フォント
+   Cinzel: 神聖でクラシックな金属碑文風フォント
+   Noto Sans JP: 視認性に優れた極太対応の日本語フォント
+*/
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Metal+Mania&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+:root {
+    /* 背景色 (漆黒 - 暗黒の深淵) */
+    --color-bg-base: #050505;
+    /* サブ背景色 (少し明るい漆黒 - 鉄板風) */
+    --color-bg-surface: #0f0f12;
+    /* カード背景色 (錆びた鉄板を模した濃灰色) */
+    --color-bg-card: #15151a;
+    
+    /* メインカラー (BABYMETALブラッディレッド) */
+    --color-red: #ff0018;
+    /* メインカラーのネオン発光用グロー効果 */
+    --color-red-glow: rgba(255, 0, 24, 0.4);
+    --color-red-glow-strong: rgba(255, 0, 24, 0.85);
+    
+    /* アクセントカラー (メタルゴールド - 黄金の甲冑) */
+    --color-gold: #e6b81c;
+    --color-gold-glow: rgba(230, 184, 28, 0.5);
+    
+    /* 文字色 (視認性を極限まで高めた超高コントラスト白色) */
+    --color-text-main: #ffffff;
+    /* 文字色 (少し暗めのグレー - コントラスト重視で従来より明るめ) */
+    --color-text-muted: #c0c0c8;
+    
+    /* 正解・成功のカラー (本アプリでは黄金の輝き) */
+    --color-success: #ffdf40;
+    /* 不正解のカラー (ブラッディダークレッド) */
+    --color-error: #b30012;
+
+    /* フォントファミリーの設定 (メタルフォントを優先適用) */
+    --font-metal: 'Metal Mania', 'Cinzel', serif;
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Noto Sans JP', sans-serif;
+}
+
+/* -----------------------------------------------------------------
+   全体設定とリセット (視認性重視のフォントサイズアップ)
+   ----------------------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    /* 
+       ベースフォントサイズを従来の 16px から 20px に引き上げ（25%拡大）。
+       これにより、相対単位（rem）を使用しているすべての文字サイズが自動的に拡大されます。
+    */
+    font-size: 20px;
+}
+
+body {
+    background-color: var(--color-bg-base);
+    color: var(--color-text-main);
+    font-family: var(--font-body);
+    line-height: 1.7; /* 行間を広げて60代でも目が疲れにくいように調整 */
+    overflow-x: hidden;
+    /* 背景に燃え上がる炎のようなメタルプレート風のグラデーション */
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 0, 24, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(230, 184, 28, 0.05) 0%, transparent 45%),
+        linear-gradient(180deg, #050505 0%, #101015 100%);
+}
+
+/* -----------------------------------------------------------------
+   ヘッダーとナビゲーション (より重厚なメタルヘッダー)
+   ----------------------------------------------------------------- */
+.app-header {
+    background: linear-gradient(180deg, #000000 0%, rgba(15, 15, 18, 0.95) 100%);
+    backdrop-filter: blur(12px);
+    /* 境界線をより太く鋭利に (メタルフレーム) */
+    border-bottom: 3px solid var(--color-red);
+    box-shadow: 0 4px 25px rgba(255, 0, 24, 0.4);
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-main {
+    /* メタル専用フォントの適用 */
+    font-family: var(--font-metal);
+    font-size: 2.2rem; /* ロゴを大きく */
+    font-weight: 900;
+    color: var(--color-text-main);
+    letter-spacing: 5px;
+    /* 稲妻のような激しい発光効果 */
+    text-shadow: 
+        0 0 10px var(--color-red-glow-strong),
+        0 0 20px var(--color-red),
+        0 0 30px rgba(0,0,0,0.8);
+}
+
+.logo-main span {
+    color: var(--color-red);
+}
+
+.logo-sub {
+    font-size: 0.9rem; /* サブタイトルも拡大 */
+    color: var(--color-gold);
+    letter-spacing: 3px;
+    font-weight: 900;
+    margin-top: -2px;
+    text-shadow: 0 0 8px var(--color-gold-glow);
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    font-family: var(--font-body);
+    font-size: 1.1rem; /* ナビボタン文字拡大 */
+    font-weight: 900;
+    cursor: pointer;
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+.nav-btn:hover {
+    color: var(--color-red);
+    border-bottom: 3px solid var(--color-red);
+}
+
+.nav-btn.active {
+    color: var(--color-text-main);
+    border-bottom: 3px solid var(--color-gold);
+    text-shadow: 0 0 10px var(--color-gold-glow);
+}
+
+/* -----------------------------------------------------------------
+   メインレイアウト
+   ----------------------------------------------------------------- */
+.app-container {
+    max-width: 1100px; /* 少し幅を広げて視認スペースを確保 */
+    margin: 2.5rem auto;
+    padding: 0 1.5rem;
+    min-height: calc(100vh - 220px);
+}
+
+/* 各画面セクション */
+.view-section {
+    display: none;
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+.view-section.active {
+    display: block;
+}
+
+/* -----------------------------------------------------------------
+   ホーム画面 (メタルプレート風カードデザイン)
+   ----------------------------------------------------------------- */
+.welcome-card {
+    background-color: var(--color-bg-surface);
+    /* 枠線を太く頑丈に */
+    border: 2px solid rgba(255, 0, 24, 0.4);
+    border-radius: 10px;
+    padding: 3rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px; /* 太く */
+    height: 100%;
+    background: linear-gradient(180deg, var(--color-red), var(--color-gold));
+}
+
+.welcome-title {
+    font-family: var(--font-metal);
+    font-size: 2.8rem; /* タイトル大幅拡大 */
+    margin-bottom: 1.2rem;
+    letter-spacing: 3px;
+    text-shadow: 0 0 15px var(--color-red-glow-strong);
+}
+
+.welcome-title span {
+    color: var(--color-red);
+}
+
+.welcome-subtitle {
+    color: var(--color-text-main); /* コントラストを上げるため明るく */
+    font-size: 1.25rem; /* 字を大きく */
+    max-width: 800px;
+    margin: 0 auto 2.5rem auto;
+    line-height: 1.8;
+}
+
+/* モードグリッド */
+.mode-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* 幅拡大 */
+    gap: 2.5rem;
+    margin-bottom: 4rem;
+}
+
+.mode-card {
+    background: linear-gradient(135deg, var(--color-bg-card) 0%, #1e1e24 100%);
+    border: 2px solid rgba(255, 255, 255, 0.05); /* 太い枠線 */
+    border-radius: 10px;
+    padding: 2.5rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+.mode-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--color-red);
+    box-shadow: 0 12px 35px var(--color-red-glow-strong);
+}
+
+/* 理論カード */
+.mode-card.theory-card:hover {
+    border-color: var(--color-red);
+    box-shadow: 0 12px 40px var(--color-red-glow-strong);
+}
+
+/* 機械カード */
+.mode-card.machine-card:hover {
+    border-color: var(--color-gold);
+    box-shadow: 0 12px 40px var(--color-gold-glow);
+}
+
+/* 苦手克服カード (激しい炎のイメージ) */
+.mode-card.weakness-card {
+    border: 2px dashed rgba(255, 0, 24, 0.5);
+    background: linear-gradient(135deg, #20080a 0%, #3a0d10 100%);
+}
+
+.mode-card.weakness-card:hover {
+    border-style: solid;
+    border-color: var(--color-red);
+}
+
+.card-badge {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    background-color: var(--color-red);
+    color: white;
+    font-size: 0.85rem; /* バッジ拡大 */
+    font-weight: 900;
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    letter-spacing: 1px;
+}
+
+.mode-icon {
+    font-size: 3rem; /* アイコン拡大 */
+    margin-bottom: 1.5rem;
+}
+
+.theory-card .mode-icon {
+    color: var(--color-red);
+    text-shadow: 0 0 10px var(--color-red);
+}
+
+.machine-card .mode-icon {
+    color: var(--color-gold);
+    text-shadow: 0 0 10px var(--color-gold);
+}
+
+.weakness-card .mode-icon {
+    text-shadow: 0 0 15px var(--color-red), 0 0 5px #fff;
+    color: #fff;
+}
+
+.mode-title {
+    font-family: var(--font-metal);
+    font-size: 1.7rem; /* タイトル拡大 */
+    font-weight: 900;
+    margin-bottom: 1rem;
+    color: var(--color-text-main);
+    letter-spacing: 1px;
+}
+
+.mode-desc {
+    color: var(--color-text-muted);
+    font-size: 1.1rem; /* 説明文字拡大 */
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.card-action-btn {
+    background: transparent;
+    color: var(--color-text-main);
+    border: 2px solid var(--color-text-muted); /* 枠を太く */
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 900;
+    font-size: 1.1rem; /* ボタン拡大 */
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.theory-card:hover .card-action-btn {
+    background-color: var(--color-red);
+    border-color: var(--color-red);
+    box-shadow: 0 0 15px var(--color-red);
+}
+
+.machine-card:hover .card-action-btn {
+    background-color: var(--color-gold);
+    border-color: var(--color-gold);
+    color: #000;
+    box-shadow: 0 0 15px var(--color-gold);
+}
+
+.weakness-card:hover .card-action-btn {
+    background-color: var(--color-red);
+    border-color: var(--color-red);
+    animation: pulseGlow 1.5s infinite;
+}
+
+/* -----------------------------------------------------------------
+   問題演習画面 (圧倒的な視認性)
+   ----------------------------------------------------------------- */
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    background-color: var(--color-bg-surface);
+    padding: 1.2rem 2rem;
+    border-radius: 8px;
+    border-left: 6px solid var(--color-red); /* 太く */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.quiz-info-item {
+    font-size: 1.1rem; /* ヘッダー情報拡大 */
+}
+
+.quiz-info-label {
+    color: var(--color-text-muted);
+    margin-right: 0.5rem;
+}
+
+.quiz-info-val {
+    font-weight: 900;
+    color: var(--color-gold);
+}
+
+.quiz-card {
+    background-color: var(--color-bg-surface);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 1.8rem 2rem; /* パディングを少しコンパクトに */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    margin-bottom: 2rem;
+}
+
+.quiz-meta {
+    display: flex;
+    gap: 1.2rem;
+    margin-bottom: 1.2rem; /* 余白を微調整 */
+}
+
+.meta-tag {
+    font-size: 0.95rem; /* タグ文字拡大 */
+    padding: 0.3rem 1rem;
+    border-radius: 4px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.meta-tag.tag-subject {
+    background-color: #000;
+    border: 2px solid var(--color-red);
+    color: var(--color-red);
+    text-shadow: 0 0 5px var(--color-red);
+}
+
+.meta-tag.tag-category {
+    background-color: #000;
+    border: 2px solid var(--color-gold);
+    color: var(--color-gold);
+    text-shadow: 0 0 5px var(--color-gold);
+}
+
+.quiz-question-text {
+    /* 
+       視認性をキープしつつ、全体が見渡しやすくなるよう 1.2rem (約24px) に調整。
+       フォントの太さは極太(900)を維持し、くっきりと読めるようにしています。
+    */
+    font-size: 1.2rem; 
+    font-weight: 900;
+    line-height: 1.7;
+    color: var(--color-text-main);
+    margin-bottom: 1.5rem; /* 余白をコンパクトに */
+    border-bottom: 2px dashed rgba(255, 255, 255, 0.1);
+    padding-bottom: 1.2rem; /* パディングをコンパクトに */
+}
+
+/* 選択肢リスト */
+.options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.option-button {
+    background-color: var(--color-bg-card);
+    border: 2px solid rgba(255, 255, 255, 0.1); /* 太く */
+    border-radius: 8px;
+    padding: 1.4rem 2rem; /* 内側余白を広く */
+    text-align: left;
+    color: var(--color-text-main);
+    font-family: var(--font-body);
+    /* 
+       選択肢も大きく 1.25rem に変更。
+       タップ・クリックしやすいサイズを確保。
+    */
+    font-size: 1.25rem; 
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.option-num {
+    font-family: var(--font-metal);
+    font-weight: 900;
+    color: var(--color-red);
+    margin-right: 1.5rem;
+    font-size: 1.5rem; /* 数字をより大きく */
+    min-width: 35px;
+    text-shadow: 0 0 5px var(--color-red-glow);
+}
+
+.option-button:hover {
+    background-color: #262630;
+    border-color: var(--color-red);
+    transform: translateX(8px); /* 動きを大きく */
+}
+
+/* 回答後の状態スタイル (メタルな閃光) */
+.option-button.correct {
+    background-color: rgba(230, 184, 28, 0.2);
+    border-color: var(--color-gold);
+    box-shadow: 0 0 20px var(--color-gold-glow);
+}
+
+.option-button.correct .option-num {
+    color: var(--color-gold);
+    text-shadow: 0 0 10px var(--color-gold);
+}
+
+.option-button.wrong {
+    background-color: rgba(255, 0, 24, 0.2);
+    border-color: var(--color-red);
+    box-shadow: 0 0 15px var(--color-red-glow);
+}
+
+.option-button.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.option-button.disabled.correct, .option-button.disabled.wrong {
+    opacity: 1.0;
+}
+
+/* -----------------------------------------------------------------
+   解説セクション (視覚的にハッキリと区別できる装飾)
+   ----------------------------------------------------------------- */
+.explanation-card {
+    margin-top: 3rem;
+    border-top: 3px solid var(--color-red);
+    padding-top: 2.5rem;
+    animation: slideUp 0.4s ease-out forwards;
+}
+
+.result-banner {
+    padding: 1.8rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 1.8rem; /* 分かりやすいようバナー文字拡大 */
+    font-family: var(--font-metal);
+    margin-bottom: 2.5rem;
+    letter-spacing: 3px;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.result-banner.banner-correct {
+    background: linear-gradient(90deg, rgba(230,184,28,0.25) 0%, rgba(230,184,28,0.05) 100%);
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+    text-shadow: 0 0 15px var(--color-gold-glow);
+}
+
+.result-banner.banner-wrong {
+    background: linear-gradient(90deg, rgba(255,0,24,0.25) 0%, rgba(255,0,24,0.05) 100%);
+    border-color: var(--color-red);
+    color: #ff808b;
+    text-shadow: 0 0 10px var(--color-red);
+}
+
+.exp-section-title {
+    font-size: 1.3rem; /* 見出し文字拡大 */
+    font-weight: 900;
+    color: var(--color-gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-shadow: 0 0 5px var(--color-gold-glow);
+}
+
+.exp-box {
+    background-color: var(--color-bg-card);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.exp-formula {
+    font-family: 'Courier New', Courier, monospace;
+    color: #ff808b;
+    font-size: 1.4rem; /* 数式文字を大きく */
+    font-weight: 900;
+    text-shadow: 0 0 5px rgba(255, 128, 139, 0.3);
+}
+
+/* 技術解説本文 */
+#tech-explanation-text {
+    font-size: 1.2rem; /* 本文拡大 */
+    line-height: 1.8;
+}
+
+/* 日常の例え専用ボックス (赤熱するグラデーション) */
+.exp-analogy-box {
+    background: linear-gradient(180deg, #200d0e 0%, #0d0404 100%);
+    border: 2px solid rgba(255, 0, 24, 0.45);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    box-shadow: inset 0 0 20px rgba(255, 0, 24, 0.2);
+}
+
+.analogy-title {
+    color: var(--color-red);
+    font-weight: 900;
+    margin-bottom: 1rem;
+    font-size: 1.35rem; /* 大きく */
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px var(--color-red-glow-strong);
+    font-family: var(--font-body);
+}
+
+.analogy-text {
+    font-size: 1.2rem; /* 読みやすさ重視で大幅に拡大 */
+    white-space: pre-wrap;
+    line-height: 1.9; /* 行間もさらに確保 */
+    color: #ffffff; /* 完全な白にしてコントラスト比最大に */
+}
+
+.quiz-action-bar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.5rem;
+}
+
+/* -----------------------------------------------------------------
+   共通ボタン (重量感のある金属エッジスタイル)
+   ----------------------------------------------------------------- */
+.btn {
+    font-family: var(--font-body);
+    font-weight: 900;
+    font-size: 1.15rem; /* ボタンサイズ拡大 */
+    padding: 1rem 2.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 2px solid transparent; /* ボーダーを追加してよりクッキリと */
+    letter-spacing: 2px;
+}
+
+.btn-primary {
+    background-color: var(--color-red);
+    color: white;
+    border-color: #ff334b;
+    box-shadow: 0 5px 20px var(--color-red-glow-strong);
+}
+
+.btn-primary:hover {
+    background-color: #ff1a35;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--color-red);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-text-main);
+    border: 2px solid var(--color-text-muted);
+}
+
+.btn-secondary:hover {
+    border-color: var(--color-text-main);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-gold {
+    background-color: var(--color-gold);
+    color: #000;
+    border-color: #ffdf40;
+    box-shadow: 0 5px 20px var(--color-gold-glow);
+}
+
+.btn-gold:hover {
+    background-color: #ffdf7a;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--color-gold);
+}
+
+/* -----------------------------------------------------------------
+   苦手克服ダッシュボード (DEATH-BOARD)
+   ----------------------------------------------------------------- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr; /* 比率微調整 */
+    gap: 2.5rem;
+}
+
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.stats-card {
+    background-color: var(--color-bg-surface);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+.stats-num {
+    font-family: var(--font-metal); /* 統計数字をメタルフォントに */
+    font-size: 3.8rem; /* 数字拡大 */
+    font-weight: 900;
+    color: var(--color-red);
+    margin: 1.2rem 0;
+    text-shadow: 0 0 15px var(--color-red);
+}
+
+.stats-num.gold-num {
+    color: var(--color-gold);
+    text-shadow: 0 0 15px var(--color-gold);
+}
+
+.stats-label {
+    font-size: 1rem; /* 拡大 */
+    color: var(--color-text-muted);
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.weakness-list-card {
+    background-color: var(--color-bg-surface);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+.weakness-list-title {
+    font-family: var(--font-body);
+    font-size: 1.4rem; /* 拡大 */
+    font-weight: 900;
+    margin-bottom: 2rem;
+    color: var(--color-text-main);
+    border-bottom: 3px solid var(--color-red); /* 太く */
+    padding-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.weakness-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    max-height: 500px; /* 縦幅拡大 */
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.weakness-item {
+    background-color: var(--color-bg-card);
+    border: 2px solid rgba(255, 0, 24, 0.15); /* 枠をハッキリ */
+    border-radius: 8px;
+    padding: 1.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.weakness-item:hover {
+    border-color: var(--color-red);
+    background-color: #260d10;
+}
+
+.weakness-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 75%;
+}
+
+.weakness-item-title {
+    font-weight: 900;
+    font-size: 1.15rem; /* リスト内問題文拡大 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.weakness-item-sub {
+    font-size: 0.9rem; /* 拡大 */
+    color: var(--color-text-muted);
+}
+
+.no-weakness-msg {
+    text-align: center;
+    color: var(--color-text-muted);
+    padding: 4rem 0;
+    font-size: 1.1rem; /* 拡大 */
+}
+
+/* -----------------------------------------------------------------
+   苦手傾向分析 (ゲージバー) のスタイル
+   ----------------------------------------------------------------- */
+.trend-item {
+    margin-bottom: 1.5rem;
+}
+
+.trend-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem; /* 視認性向上のため少し大きく */
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+}
+
+.trend-subject-theory {
+    color: var(--color-red);
+    text-shadow: 0 0 5px var(--color-red-glow);
+}
+
+.trend-subject-machine {
+    color: var(--color-gold);
+    text-shadow: 0 0 5px var(--color-gold-glow);
+}
+
+.trend-bar-container {
+    background-color: #121215;
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    height: 22px;
+    overflow: hidden;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.8);
+}
+
+.trend-bar-fill {
+    height: 100%;
+    /* 赤から金への燃え上がるメタルグラデーション */
+    background: linear-gradient(90deg, var(--color-red) 0%, var(--color-gold) 100%);
+    box-shadow: 0 0 12px var(--color-red-glow-strong);
+    border-radius: 8px;
+    width: 0%; /* JSで動的に変動 */
+    transition: width 0.8s cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+
+/* -----------------------------------------------------------------
+   フッター
+   ----------------------------------------------------------------- */
+.app-footer {
+    border-top: 2px solid rgba(255, 255, 255, 0.08); /* 太く */
+    background-color: #020202;
+    padding: 2.5rem 0;
+    text-align: center;
+    margin-top: 5rem;
+    font-size: 0.95rem; /* フッター文字拡大 */
+    color: var(--color-text-muted);
+    letter-spacing: 1px;
+}
+
+.app-footer span {
+    color: var(--color-red);
+    text-shadow: 0 0 5px var(--color-red);
+}
